@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<string name="app_name">Dr Soko</string>
+	<string name="action_settings">Settings</string>
+	<string name="action_retry">Retry</string>
+	<string name="action_goto">Go to&#8230;</string>
+	<string name="go_left">Left</string>
+	<string name="go_down">Down</string>
+	<string name="go_up">Up</string>
+	<string name="go_right">Right</string>
+	<string name="lowscore">Min:\u0020</string>
+	<string name="scoreLabel">Steps:\u0020</string>
+	<string name="action_nextstage">Next stage</string>
+	<string name="action_prevstage">Previous stage</string>
+	<string name="highscore_never">Never</string>
+	<string name="action_delete">Delete</string>
+	<string name="action_export">Share</string>
+	<string name="action_import">Import</string>
+	<string name="action_clearhs">Clear highscores</string>
+	<string name="action_new">New</string>
+	<string name="action_edit">Edit</string>
+	<string name="title_export">Share which?</string>
+	<string name="title_chooser">Share &#8220;%s&#8221; using&#8230;</string>
+	<string name="title_delete">Delete which?</string>
+	<string name="title_deletedialog">Delete a file?</string>
+	<string name="deletedialog_deletebutton">Delete</string>
+	<string name="text_delete">Sure to delete &#8220;%s&#8221;?</string>
+	<string name="title_nodelete">Cannot delete &#8220;%s&#8221;!</string>
+	<string name="text_nodelete">Internal stages cannot be deleted.</string>
+	<string name="title_clearhs">Clear highscores of&#8230;</string>
+	<string name="title_clearhsdialog">Clear highscores?</string>
+	<string name="text_clearhs">Sure to clear highscores for &#8220;%s&#8221;?</string>
+	<string name="clearbutton">Clear</string>
+	<string name="text_paste_here">Paste stages file&#8230;</string>
+	<string name="importbutton">Import</string>
+	<string name="title_clear">Congrats!</string>
+	<string name="text_clear">You have cleared &#8220;%s&#8221;!</string>
+	<string name="text_newhs">You have cleared &#8220;%s&#8221; and also made it to the highscores!</string>
+	<string name="button_clear">Next</string>
+	<string name="toast_last">Showing the last stage</string>
+	<string name="toast_fst">Showing the first stage</string>
+	<string name="newfile_templ">Untitled\nFile description\n</string>
+	<string name="newstage_templ">--\nStage title\n@\n</string>
+	<string name="toast_fileslot_full">No space for new file</string>
+	<string name="toast_io_error">I/O Error</string>
+	<string name="title_edit">Edit which?</string>
+	<string name="title_cantedit">Cannot edit &#8220;%s&#8221;!</string>
+	<string name="text_cantedit">Internal stages cannot be edited. Try making a copy using Share and Import.</string>
+	<string name="title_activity_edit">Edit</string>
+	<string name="action_about">About</string>
+	<string name="aboutdialog_title">About %s</string>
+	<string name="aboutdialog_text">Version %s\nCopyright (C) 2013\u0020\u0020Hisanobu Tomari.\nThis program comes with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to redistribute it under certain conditions [GPLv3]; see the source for details.\nSee http://example.com/ for sources and add-on stage data.</string>
+	<string name="aboutdialog_dismiss">Dismiss</string>
+</resources>

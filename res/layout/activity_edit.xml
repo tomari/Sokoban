@@ -1,0 +1,107 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".EditActivity" >
+
+	<LinearLayout
+		android:id="@+id/editControlBox"
+		android:background="@color/editor_toolbox_bg"
+		android:gravity="center_horizontal"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentRight="true" >
+
+		<ImageView
+			android:id="@+id/currentSelectionView"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_vertical"
+			android:src="@drawable/move"
+			android:contentDescription="@string/ivdescr_currentSel"
+			android:padding="@dimen/editor_currentSel_padding" />
+
+		<HorizontalScrollView
+			android:id="@+id/horizontalScrollView1"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content">
+
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="match_parent"
+				android:orientation="horizontal"
+				android:paddingBottom="@dimen/editor_toolbox_padding"
+				android:paddingTop="@dimen/editor_toolbox_padding">
+				
+				<ImageButton
+					android:id="@+id/moveButton"
+					android:contentDescription="@string/ibdescr_handtool"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:src="@drawable/move"
+					android:onClick="onSelectMoveTool" />
+			    
+				<ImageButton
+					android:id="@+id/selectWallButton"
+					android:contentDescription="@string/ibdescr_wall"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:src="@drawable/kabe"
+					android:onClick="onSelectWallTool" />
+
+				<ImageButton
+					android:id="@+id/selectFloorButton"
+					android:contentDescription="@string/ibdescr_floor"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:src="@drawable/yuka"
+					android:onClick="onSelectFloorTool" />
+
+				<ImageButton
+					android:id="@+id/selectParcelButton"
+					android:contentDescription="@string/ibdescr_parcel"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:src="@drawable/nimotsu"
+					android:onClick="onSelectParcelTool" />
+
+				<ImageButton
+					android:id="@+id/selectTargetButton"
+					android:contentDescription="@string/ibdescr_target"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:src="@drawable/target"
+					android:onClick="onSelectTargetTool" />
+
+				<ImageButton
+					android:id="@+id/selectPlayerButton"
+					android:contentDescription="@string/ibdescr_player"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:src="@drawable/hito"
+					android:onClick="onSelectPlayerTool" />
+
+				<ImageButton
+					android:id="@+id/ruboutButton"
+					android:contentDescription="@string/ibdescr_rubout"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:src="@drawable/blanktile"
+					android:onClick="onSelectRuboutTool" />
+							</LinearLayout>
+		</HorizontalScrollView>
+
+	</LinearLayout>
+
+	<su.drsouko.SokoView
+		android:id="@+id/editorSokoView"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentRight="true"
+		android:layout_above="@id/editControlBox" />
+	
+</RelativeLayout>

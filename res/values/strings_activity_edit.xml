@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="ivdescr_currentSel">Current tool</string>
+	<string name="ibdescr_wall">Wall</string>
+	<string name="ibdescr_floor">Floor</string>
+	<string name="ibdescr_parcel">Parcel</string>
+	<string name="ibdescr_target">Target</string>
+	<string name="ibdescr_player">Player</string>
+	<string name="ibdescr_handtool">Move</string>
+	<string name="ibdescr_rubout">Rubout</string>
+	<string name="action_settitle">Set title&#8230;</string>
+	<string name="action_add">Add stage</string>
+	<string name="action_remove">Remove stage</string>
+	<string name="action_swap">Set order</string>
+	<string name="action_dup">Duplicate stage</string>
+	<string name="titledialog_filetitlehint">File title</string>
+	<string name="titledialog_filecopyhint">File description</string>
+	<string name="titledialog_stagetitlehint">Stage title</string>
+	<string name="titledialog_setbutton">Set</string>
+	<string name="titledialog_title">Set title</string>
+	<string name="dialog_remove_title">Remove this stage?</string>
+	<string name="dialog_remove_text">Sure to remove stage &#8220;%s&#8221;?</string>
+	<string name="dialog_remove_go">Remove</string>
+	<string name="dialog_swap_title">Put stage &#8220;%s&#8221; before&#8230;</string>
+	<string name="toast_dupcomplete">Stage duplicated</string>
+</resources>

@@ -1,0 +1,107 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".SokoActivity" >
+
+	<su.drsouko.SokoView
+		android:id="@+id/gameView"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true"
+		android:layout_alignParentLeft="true"
+		android:layout_alignParentRight="true"
+		android:layout_alignParentTop="true" />
+
+	<LinearLayout
+		android:id="@+id/controlPanel"
+		android:paddingBottom="@dimen/activity_vertical_margin"
+		android:paddingLeft="@dimen/activity_vertical_margin"
+		android:paddingRight="@dimen/activity_vertical_margin"
+		android:paddingTop="@dimen/activity_vertical_margin"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentBottom="true" >
+
+		<ImageButton
+			android:id="@+id/leftButton"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:contentDescription="@string/go_left"
+			android:src="@drawable/arrow_left" 
+			android:onClick="goLeft"
+			android:padding="@dimen/controlPanel_padding"
+			android:layout_marginRight="@dimen/controlPanel_margin" />
+
+		<ImageButton
+			android:id="@+id/downButton"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:contentDescription="@string/go_down"
+			android:src="@drawable/arrow_down"
+			android:onClick="goDown"
+			android:padding="@dimen/controlPanel_padding"
+			android:layout_marginRight="@dimen/controlPanel_margin"
+			android:layout_marginLeft="@dimen/controlPanel_margin" />
+
+		<ImageButton
+			android:id="@+id/upButton"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:contentDescription="@string/go_up"
+			android:src="@drawable/arrow_up"
+			android:onClick="goUp"
+			android:padding="@dimen/controlPanel_padding"
+			android:layout_marginRight="@dimen/controlPanel_margin"
+			android:layout_marginLeft="@dimen/controlPanel_margin" />
+
+		<ImageButton
+			android:id="@+id/rightButton"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:contentDescription="@string/go_right"
+			android:src="@drawable/arrow_right"
+			android:onClick="goRight"
+			android:padding="@dimen/controlPanel_padding"
+			android:layout_marginLeft="@dimen/controlPanel_margin" />
+
+	</LinearLayout>
+
+	<TextView
+		android:id="@+id/highscoreLabel"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_alignParentRight="true"
+		android:background="@color/scoreBg"
+		android:textAppearance="?android:attr/textAppearanceMedium" />
+	<TextView
+		android:id="@+id/highscoreLabelLabel"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_toLeftOf="@id/highscoreLabel"
+		android:background="@color/scoreBg"
+		android:textAppearance="?android:attr/textAppearanceMedium"
+		android:text="@string/lowscore" />
+
+	<TextView
+	    android:id="@+id/scoreLabelLabel"
+	    android:layout_width="wrap_content"
+	    android:layout_height="wrap_content"
+	    android:layout_alignParentLeft="true"
+	    android:layout_alignParentTop="true"
+	    android:background="@color/scoreBg"
+	    android:text="@string/scoreLabel"
+	    android:textAppearance="?android:attr/textAppearanceMedium" />
+
+	<TextView
+		android:id="@+id/scoreLabel"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_alignParentTop="true"
+		android:layout_toRightOf="@id/scoreLabelLabel"
+		android:background="@color/scoreBg"
+		android:textAppearance="?android:attr/textAppearanceMedium" />
+	
+</RelativeLayout>

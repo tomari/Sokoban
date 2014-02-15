@@ -1,0 +1,18 @@
+<resources>
+
+	<string name="title_activity_settings">Settings</string>
+	<string name="preflabel_control_place">Place arrow buttons at</string>
+	<string-array name="pref_control_place">
+		<item>Center</item>
+		<item>Right</item>
+		<item>Left</item>
+		<item>Hide</item>
+	</string-array>
+	<string-array name="pref_control_place_ids">
+		<item>0</item>
+		<item>1</item>
+		<item>2</item>
+		<item>3</item>
+	</string-array>
+	<string name="preflabel_enable_sound">Sound effects</string>
+</resources>

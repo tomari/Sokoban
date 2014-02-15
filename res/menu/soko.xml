@@ -1,0 +1,30 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+	<item
+		android:id="@+id/action_retry"
+		android:orderInCategory="200"
+		android:showAsAction="ifRoom"
+		android:alphabeticShortcut="r"
+		android:title="@string/action_retry"
+		android:icon="@drawable/nav_retry" />
+	<item
+		android:id="@+id/action_nextstage"
+		android:orderInCategory="220"
+		android:showAsAction="always"
+		android:icon="@drawable/nav_next"
+		android:alphabeticShortcut="n"
+		android:title="@string/action_nextstage" />
+	<item
+		android:id="@+id/action_prevstage"
+		android:orderInCategory="210"
+		android:showAsAction="always"
+		android:icon="@drawable/nav_prev"
+		android:alphabeticShortcut="p"
+		android:title="@string/action_prevstage" />
+	<item
+	    android:id="@+id/action_goto"
+	    android:orderInCategory="250"
+	    android:showAsAction="ifRoom"
+	    android:alphabeticShortcut="g"
+	    android:title="@string/action_goto" />
+</menu>

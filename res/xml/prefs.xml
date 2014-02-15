@@ -1,0 +1,13 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android" >
+
+	<ListPreference
+		android:key="control_button_placement"
+		android:title="@string/preflabel_control_place"
+		android:entries="@array/pref_control_place"
+		android:entryValues="@array/pref_control_place_ids"
+		android:defaultValue="0" />
+	<CheckBoxPreference
+		android:key="enable_sound"
+		android:title="@string/preflabel_enable_sound"
+		android:defaultValue="true" />
+</PreferenceScreen>

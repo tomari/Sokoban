@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<color name="scoreBg">#7fff</color>
+	<color name="editor_toolbox_bg">#80f0</color>
+</resources>

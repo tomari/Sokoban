@@ -1,0 +1,48 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+	<item
+		android:id="@+id/action_new"
+		android:orderInCategory="10"
+		android:showAsAction="ifRoom"
+		android:icon="@drawable/content_new"
+		android:title="@string/action_new" />
+	<item
+		android:id="@+id/action_edit"
+		android:orderInCategory="20"
+		android:showAsAction="always"
+		android:icon="@drawable/content_edit"
+		android:title="@string/action_edit" />
+	<item 
+		android:id="@+id/action_export"
+		android:orderInCategory="110"
+		android:icon="@drawable/social_share"
+		android:showAsAction="ifRoom"
+		android:title="@string/action_export" />
+	<item
+		android:id="@+id/action_import"
+		android:orderInCategory="120"
+		android:showAsAction="never"
+		android:title="@string/action_import" />
+	<item
+		android:id="@+id/action_clearhs"
+		android:orderInCategory="130"
+		android:showAsAction="never"
+		android:title="@string/action_clearhs" />
+	<item 
+		android:id="@+id/action_delete"
+		android:orderInCategory="150"
+		android:showAsAction="ifRoom"
+		android:icon="@drawable/content_discard"
+		android:title="@string/action_delete" />
+	<item
+		android:id="@+id/action_settings"
+		android:orderInCategory="1000"
+		android:showAsAction="never"
+		android:icon="@android:drawable/ic_menu_preferences"
+		android:title="@string/action_settings"/>
+	<item
+	    android:id="@+id/action_about"
+	    android:orderInCategory="1100"
+	    android:showAsAction="never"
+	    android:icon="@android:drawable/ic_menu_info_details"
+	    android:title="@string/action_about" />
+</menu>
