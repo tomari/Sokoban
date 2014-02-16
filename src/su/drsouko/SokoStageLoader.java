@@ -24,6 +24,7 @@ public class SokoStageLoader {
 	private int roomWidth, roomHeight;
 	private int chrx, chry;
 	private char[][] room;
+	private int targets;
 	public static final String STAGE_SEP="--";
 	private Context ctx;
 	private int maxLoadedStage;
@@ -45,6 +46,7 @@ public class SokoStageLoader {
 	public int chry() { return chry; }
 	public char[][] room() { return room; }
 	public int maxLoadedStage() { return maxLoadedStage; }
+	public int numTargets() { return targets; }
 	private InputStream InputStreamFor(String thePath) {
 		InputStream stgIn;
 		if(thePath==null) {
@@ -91,6 +93,7 @@ public class SokoStageLoader {
 			roomWidth=Math.max(1,max_linelen);
 			room=new char[roomHeight][roomWidth];
 			int y=0;
+			targets=0;
 			while(!a.isEmpty()) {
 				String line=a.pop();
 				int x=0;
@@ -102,6 +105,7 @@ public class SokoStageLoader {
 							chry=y;
 							c='.';
 						}
+						if(c=='x') { targets++; }
 						room[y][x]=c;
 					}
 				}

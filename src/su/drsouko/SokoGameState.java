@@ -23,6 +23,7 @@ public class SokoGameState implements Serializable {
 	public boolean editMode=false;
 	public static final int MAX_STAGE=256;
 	public int loaded_stages=0;
+	private int targets;
 	public SokoGameState(Context ctx,String path) {
 		stagesFilename=path;
 		//loadStage(ctx,0,false);
@@ -49,11 +50,13 @@ public class SokoGameState implements Serializable {
 				room[dst2y][dst2x]='o';
 			} else if(dst2Chr=='x') {
 				room[dst2y][dst2x]='0';
+				targets--;
 			} else {
 				return false;
 			}
 			if(dstChr=='0') {
 				room[dsty][dstx]='x';
+				targets++;
 			} else {
 				room[dsty][dstx]='.';
 			}
@@ -69,16 +72,7 @@ public class SokoGameState implements Serializable {
 		return res;
 	}
 	public boolean isFinished() {
-		int remain=0;
-		for(int y=0; y<roomHeight; y++) {
-			for(int x=0; x<roomWidth; x++) {
-				if(room[y][x]=='x') {
-					remain++;
-				}
-			}
-		}
-		isFinished=(remain==0);
-		return isFinished;
+		return targets==0;
 	}
 	public int chrX() { return chrx; }
 	public int chrY() { return chry; }
@@ -112,7 +106,7 @@ public class SokoGameState implements Serializable {
 			stageTitle=loader.stageTitle();
 			stagesCopyright=loader.stagesCopyright();
 			stage=stageno;
-			isFinished=false;
+			targets=loader.numTargets();
 		}
 		return res;
 	}
