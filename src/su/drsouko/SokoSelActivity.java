@@ -245,6 +245,7 @@ public class SokoSelActivity extends ListActivity {
 			String filenameCandidate=String.format("%s%08X"+STAGEFILE_SUFFIX, dir,nextnum);
 			File fileCandidate=new File(filenameCandidate);
 			if(fileCandidate.exists()) {
+				nextnum++;
 				continue;
 			} else {
 				//Log.println(Log.DEBUG, getPackageName(), "Create a file "+filenameCandidate);
