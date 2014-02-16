@@ -54,7 +54,7 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 		highscores=new HighscoreMgr(this,path);
 		highscores.load();
 		if(savedInstanceState==null) {
-			state=new SokoGameState(this,path);
+			state=new SokoGameState(path);
 			if(!gotoStage(highscores.minUnclearedStage(),false)) {
 				gotoStage(1,false);
 			}

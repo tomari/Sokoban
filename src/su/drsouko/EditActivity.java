@@ -32,7 +32,7 @@ public class EditActivity extends Activity implements SokoTouchListener {
 		gameView.setSokoTouchListener(this);
 		String path=this.getIntent().getExtras().getString(EDIT_PATH);
 		if(savedInstanceState==null) {
-			state=new SokoGameState(this,path);
+			state=new SokoGameState(path);
 			state.editMode=true;
 			gotoStage(1);
 			onSelectTool(Tool.Move);

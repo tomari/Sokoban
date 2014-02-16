@@ -24,9 +24,8 @@ public class SokoGameState implements Serializable {
 	public static final int MAX_STAGE=256;
 	public int loaded_stages=0;
 	private int targets;
-	public SokoGameState(Context ctx,String path) {
+	public SokoGameState(String path) {
 		stagesFilename=path;
-		//loadStage(ctx,0,false);
 		steps=0;
 	}
 	public boolean moveXY(int deltax, int deltay) {
