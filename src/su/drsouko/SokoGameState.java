@@ -19,7 +19,6 @@ public class SokoGameState implements Serializable {
 	public String stagesFilename;
 	public int stage=1;
 	public char room[][];
-	public boolean isFinished=false;
 	public boolean editMode=false;
 	public static final int MAX_STAGE=256;
 	public int loaded_stages=0;
@@ -29,7 +28,7 @@ public class SokoGameState implements Serializable {
 		steps=0;
 	}
 	public boolean moveXY(int deltax, int deltay) {
-		if(isFinished) { return false; }
+		if(isFinished()) { return false; }
 		int dstx=chrx+deltax;
 		int dsty=chry+deltay;
 		int chrxbuf=chrx;
