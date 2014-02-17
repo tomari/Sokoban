@@ -273,31 +273,24 @@ public class SokoSelActivity extends ListActivity {
 		if(itemid==R.id.action_settings) {
 			Intent intent=new Intent(this,SettingsActivity.class);
 			startActivity(intent);
-			return true;
 		} else if(itemid==R.id.action_export) {
 			transitionStateTo(SelState.Export);
-			return true;
 		} else if(itemid==R.id.action_delete) {
 			transitionStateTo(SelState.Delete);
-			return true;
 		} else if(itemid==R.id.action_clearhs) {
 			transitionStateTo(SelState.ClearHS);
-			return true;
 		} else if(itemid==R.id.action_import) {
 			importFile(null);
-			return true;
 		} else if(itemid==R.id.action_new) {
 			newFile();
-			return true;
 		} else if(itemid==R.id.action_edit) {
 			transitionStateTo(SelState.Edit);
-			return true;
 		} else if(itemid==R.id.action_about) {
 			handleAboutDialog();
-			return true;
 		} else {
 			return super.onMenuItemSelected(featureId,item);
 		}
+		return true;
 	}
 	private void editStages(int position) {
 		String filePath=files.get(position).get(COL_FILENAME);

@@ -137,7 +137,6 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 		int itemid=item.getItemId();
 		if(itemid==android.R.id.home) {
 			super.onBackPressed();
-			return true;
 		} else if(itemid==R.id.action_retry) {
 			gotoStage(state.stage);
 			stepsView.setText(numFormat.format(state.steps));
@@ -148,8 +147,10 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 			gotoStage(state.stage-1);
 		} else if(itemid==R.id.action_goto) {
 			pickStage();
+		} else {
+			return super.onMenuItemSelected(featureId, item);
 		}
-		return super.onMenuItemSelected(featureId, item);
+		return true;
 	}
 	public void goLeft(View view) {
 		moveXY(-1,0);

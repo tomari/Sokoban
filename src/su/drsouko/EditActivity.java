@@ -1,6 +1,5 @@
 package su.drsouko;
 
-import su.drsouko.SokoView.SokoTouchListener;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -12,7 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class EditActivity extends Activity implements SokoTouchListener {
+public class EditActivity extends Activity implements SokoView.SokoTouchListener {
 	public static final String EDIT_PATH="Path";
 	private static final String SAVELABEL_STATE="state";
 	private static enum Tool {Move, Wall, Floor, Parcel, Target, Player, Rubout}
@@ -98,34 +97,26 @@ public class EditActivity extends Activity implements SokoTouchListener {
 		int itemid=item.getItemId();
 		if(itemid==android.R.id.home) {
 			super.onBackPressed();
-			return true;
 		} else if(itemid==R.id.action_settitle) {
 			callTitleDialog();
-			return true;
 		} else if(itemid==R.id.action_editorgoto) {
 			pickStage();
-			return true;
 		} else if(itemid==R.id.action_addstage) {
 			addStage();
-			return true;
 		} else if(itemid==R.id.action_rmstage) {
 			rmStage();
-			return true;
 		} else if(itemid==R.id.action_swap) {
 			swapStage();
-			return true;
 		} else if(itemid==R.id.action_duplicate) {
 			dupStage();
-			return true;
 		} else if(itemid==R.id.action_editor_prevstage) {
 			action_gotoStage(-1);
-			return true;
 		} else if(itemid==R.id.action_editor_nextstage) {
 			action_gotoStage(1);
-			return true;
 		} else {
 			return super.onMenuItemSelected(featureId, item);
 		}
+		return true;
 	}
 	private boolean gotoStage(int stage) {
 		if(stage<1) { return false; }
