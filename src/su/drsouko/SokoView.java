@@ -12,7 +12,8 @@ import android.view.View;
 
 public class SokoView extends View {
 	private SokoGameState gameState=null;
-	private Drawable hito,kabe,nimotsu,target,yuka;
+	private Drawable kabe,nimotsu,target,yuka;
+	private Drawable pl_r1, pl_r2, pl_l1, pl_l2, pl_u1, pl_u2;
 	private int chrDimX=0, chrDimY=0;
 	private ScaleGestureDetector scaleDetector;
 	private GestureDetector gestureDetector;
@@ -35,13 +36,18 @@ public class SokoView extends View {
 	}
 	private void init(Context ctx) {
 		Resources r=getResources();
-		hito=r.getDrawable(R.drawable.hito);
 		kabe=r.getDrawable(R.drawable.kabe);
 		nimotsu=r.getDrawable(R.drawable.nimotsu);
 		target=r.getDrawable(R.drawable.target);
 		yuka=r.getDrawable(R.drawable.yuka);
-		chrDimX=hito.getIntrinsicWidth();
-		chrDimY=hito.getIntrinsicHeight();
+		pl_r1=r.getDrawable(R.drawable.player_right1);
+		pl_r2=r.getDrawable(R.drawable.player_right2);
+		pl_l1=r.getDrawable(R.drawable.player_left1);
+		pl_l2=r.getDrawable(R.drawable.player_left2);
+		pl_u1=r.getDrawable(R.drawable.player_up1);
+		pl_u2=r.getDrawable(R.drawable.player_up2);
+		chrDimX=kabe.getIntrinsicWidth();
+		chrDimY=kabe.getIntrinsicHeight();
 		scaleDetector=new ScaleGestureDetector(ctx,new ScaleListener());
 		gestureDetector=new GestureDetector(ctx,new GestureListener(this));
 	}
@@ -91,7 +97,7 @@ public class SokoView extends View {
 					int v=offsY+chrDimY*y;
 					int u1,v1;
 					if(x==gameState.chrX() && y==gameState.chrY()) {
-						chr[1]=hito;
+						chr[1]=selectPlayerDrawable();
 						float lastx=gameState.lastChrX();
 						float lasty=gameState.lastChrY();
 						u1=offsX+(int) (((float)chrDimX)*(lastx+intp*((float)x-lastx)));
@@ -230,5 +236,23 @@ public class SokoView extends View {
 	public int numVerticalChrs() {
 		float chrDimV=chrDimY*gameState.scale;
 		return (int) Math.ceil(getHeight()/chrDimV);
+	}
+	private Drawable selectPlayerDrawable() {
+		float intp=gameState.animProgress;
+		Drawable res;
+		if(gameState.lastChrY()!=gameState.chrY()) {
+			boolean half=intp<0.5f;
+			boolean parity=((gameState.chrY()&1)>0)^half;
+			res=parity?pl_u1:pl_u2;
+		} else {
+			boolean half=intp<0.5f;
+			boolean parity=((gameState.chrX()&1)>0)^half;
+			if(gameState.lastChrX()>gameState.chrX()) {
+				res=parity?pl_l2:pl_l1;
+			} else {
+				res=parity?pl_r2:pl_r1;
+			}
+		}
+		return res;
 	}
 }

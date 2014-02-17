@@ -80,7 +80,7 @@ public class EditActivity extends Activity implements SokoView.SokoTouchListener
 		else if(currentToolSelection==Tool.Floor) { bitmap=R.drawable.yuka; }
 		else if(currentToolSelection==Tool.Parcel) { bitmap=R.drawable.nimotsu; }
 		else if(currentToolSelection==Tool.Target) { bitmap=R.drawable.target; }
-		else if(currentToolSelection==Tool.Player) {bitmap=R.drawable.hito; }
+		else if(currentToolSelection==Tool.Player) {bitmap=R.drawable.player_right1; }
 		else if(currentToolSelection==Tool.Rubout) {bitmap=R.drawable.blanktile; }
 		else if(currentToolSelection==Tool.Move) {
 			enableScroll=true;

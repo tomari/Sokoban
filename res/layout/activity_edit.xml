@@ -80,7 +80,7 @@
 					android:contentDescription="@string/ibdescr_player"
 					android:layout_width="wrap_content"
 					android:layout_height="wrap_content"
-					android:src="@drawable/hito"
+					android:src="@drawable/player_right1"
 					android:onClick="onSelectPlayerTool" />
 
 				<ImageButton
