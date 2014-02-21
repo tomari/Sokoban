@@ -3,6 +3,4 @@ Requires Android 3.0+
 
 ## TODO
 
-Add more predefined stages
-
 Add sound effects
