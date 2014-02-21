@@ -41,6 +41,9 @@ foreach(@ARGV) {
 	  print 'x';
 	} elsif($_ eq '@') {
 	  print '@';
+	} elsif($_ eq '*') {
+	  # i dunno
+	  print '.';
 	}
 	#$prevwall=0;
       }
