@@ -116,21 +116,30 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 		if(keyCode==KeyEvent.KEYCODE_DPAD_DOWN || keyCode==KeyEvent.KEYCODE_J ||
 				keyCode==KeyEvent.KEYCODE_NUMPAD_8) {
 			goDown(null);
-			return true;
 		} else if(keyCode==KeyEvent.KEYCODE_DPAD_LEFT || keyCode==KeyEvent.KEYCODE_H ||
 				keyCode==KeyEvent.KEYCODE_NUMPAD_4) {
 			goLeft(null);
-			return true;
 		} else if(keyCode==KeyEvent.KEYCODE_DPAD_UP || keyCode==KeyEvent.KEYCODE_K ||
 				keyCode==KeyEvent.KEYCODE_NUMPAD_2) {
 			goUp(null);
-			return true;
 		} else if(keyCode==KeyEvent.KEYCODE_DPAD_RIGHT || keyCode==KeyEvent.KEYCODE_L ||
 				keyCode==KeyEvent.KEYCODE_NUMPAD_6) {
 			goRight(null);
-			return true;
+		} else if(keyCode==KeyEvent.KEYCODE_R) {
+			retryThisStage();
+		} else if(keyCode==KeyEvent.KEYCODE_PAGE_DOWN) {
+			gotoStage(state.stage+1);
+		} else if(keyCode==KeyEvent.KEYCODE_PAGE_UP) {
+			gotoStage(state.stage-1);
+		} else {
+			return super.onKeyDown(keyCode, event);
 		}
-		return super.onKeyDown(keyCode, event);
+		return true;
+	}
+	private void retryThisStage() {
+		gotoStage(state.stage);
+		stepsView.setText(numFormat.format(state.steps));
+		gameView.invalidate();
 	}
 	@Override
 	public boolean onMenuItemSelected(int featureId,MenuItem item) {
@@ -138,9 +147,7 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 		if(itemid==android.R.id.home) {
 			super.onBackPressed();
 		} else if(itemid==R.id.action_retry) {
-			gotoStage(state.stage);
-			stepsView.setText(numFormat.format(state.steps));
-			gameView.invalidate();
+			retryThisStage();
 		} else if(itemid==R.id.action_nextstage) {
 			gotoStage(state.stage+1);
 		} else if(itemid==R.id.action_prevstage) {

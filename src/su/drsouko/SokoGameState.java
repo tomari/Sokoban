@@ -87,6 +87,13 @@ public class SokoGameState implements Serializable {
 		viewOffsU=u;
 		viewOffsV=v;
 	}
+	public void setChrXY(int x, int y, boolean setLast) {
+		setChrXY(x,y);
+		if(setLast) {
+			lastChrX=chrx;
+			lastChrY=chry;
+		}
+	}
 	public boolean loadStage(Context ctx, int stageno, boolean dry_run) {
 		SokoStageLoader loader=new SokoStageLoader(ctx,stagesFilename);
 		boolean res=loader.loadStage(stageno);

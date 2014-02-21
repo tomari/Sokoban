@@ -50,6 +50,7 @@ public class SokoView extends View {
 		chrDimY=kabe.getIntrinsicHeight();
 		scaleDetector=new ScaleGestureDetector(ctx,new ScaleListener());
 		gestureDetector=new GestureDetector(ctx,new GestureListener(this));
+		setFocusable(true);
 	}
 	public int getChrDimX() {
 		return chrDimX;
@@ -213,12 +214,8 @@ public class SokoView extends View {
 				int offsY=gameState.viewOffsV();
 				int offsX2=offsX-(int) distanceX;
 				int offsY2=offsY-(int) distanceY;
-				int vw=getWidth();
-				int vh=getHeight();
-				int roomDimU=(int)(gameState.roomWidth*chrDimX*gameState.scale);
-				int roomDimV=(int)(gameState.roomHeight*chrDimY*gameState.scale);
-				int newOffsU=Math.max(-roomDimU+chrDimX/2,Math.min(vw-chrDimX/2, offsX2));
-				int newOffsV=Math.max(-roomDimV+chrDimY/2, Math.min(vh-chrDimY/2,offsY2));
+				int newOffsU=Math.max(minOffsU(),Math.min(maxOffsU(), offsX2));
+				int newOffsV=Math.max(minOffsV(), Math.min(maxOffsV(),offsY2));
 				gameState.setViewOffs(newOffsU, newOffsV);
 				invalidate();
 				return true;
@@ -226,6 +223,26 @@ public class SokoView extends View {
 				return false;
 			}
 		}
+	}
+	public int minOffsU() {
+		int roomDimU=(int)(gameState.roomWidth*chrDimX*gameState.scale);
+		int chrDimU=(int) (chrDimX*gameState.scale);
+		return -roomDimU+chrDimU/2;
+	}
+	public int maxOffsU() {
+		int vw=getWidth();
+		int chrDimU=(int) (chrDimX*gameState.scale);
+		return vw-chrDimU/2;
+	}
+	public int minOffsV() {
+		int roomDimV=(int)(gameState.roomHeight*chrDimY*gameState.scale);
+		int chrDimV=(int) (chrDimX*gameState.scale);
+		return -roomDimV+chrDimV/2;
+	}
+	public int maxOffsV() {
+		int vh=getHeight();
+		int chrDimV=(int) (chrDimX*gameState.scale);
+		return vh-chrDimV/2;
 	}
 	public boolean isScrollEnabled() { return scrollEnabled; }
 	public void setScrollEnable(boolean enableScroll) { scrollEnabled=enableScroll; }

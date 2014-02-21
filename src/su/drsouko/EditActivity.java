@@ -1,9 +1,11 @@
 package su.drsouko;
 
 import android.os.Bundle;
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.view.KeyEvent;
 //import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -11,7 +13,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-public class EditActivity extends Activity implements SokoView.SokoTouchListener {
+public class EditActivity extends Activity implements SokoView.SokoTouchListener, ValueAnimator.AnimatorUpdateListener {
 	public static final String EDIT_PATH="Path";
 	private static final String SAVELABEL_STATE="state";
 	private static enum Tool {Move, Wall, Floor, Parcel, Target, Player, Rubout}
@@ -21,6 +23,7 @@ public class EditActivity extends Activity implements SokoView.SokoTouchListener
 	private SokoView gameView;
 	private boolean dirty;
 	private Toast toast;
+	private ValueAnimator anim=null;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -145,7 +148,7 @@ public class EditActivity extends Activity implements SokoView.SokoTouchListener
 		if(x<0) {
 			extend_x_by=calcExtendSize(x,gameView.numHorizontalChrs());
 			x-=extend_x_by;
-			state.setChrXY(state.chrX()-extend_x_by, state.chrY());
+			state.setChrXY(state.chrX()-extend_x_by, state.chrY(),true);
 			state.setViewOffs(state.viewOffsU()+extend_x_by*(int)(gameView.getChrDimX()*state.scale),
 					state.viewOffsV());
 		} else if(state.roomWidth<=x) {
@@ -154,7 +157,7 @@ public class EditActivity extends Activity implements SokoView.SokoTouchListener
 		if(y<0) {
 			extend_y_by=calcExtendSize(y,gameView.numVerticalChrs());
 			y-=extend_y_by;
-			state.setChrXY(state.chrX(), state.chrY()-extend_y_by);
+			state.setChrXY(state.chrX(), state.chrY()-extend_y_by,true);
 			state.setViewOffs(state.viewOffsU(),
 					state.viewOffsV()+extend_y_by*(int) (gameView.getChrDimY()*state.scale));
 		} else if(state.roomHeight<=y) {
@@ -171,7 +174,7 @@ public class EditActivity extends Activity implements SokoView.SokoTouchListener
 		dirty=true;
 		if(currentToolSelection==Tool.Player) {
 			if(state.room[y][x]=='.') {
-				state.setChrXY(x, y);
+				state.setChrXY(x, y, true);
 			}
 		} else {
 			char c=mapStateToSokoChar();
@@ -291,5 +294,61 @@ public class EditActivity extends Activity implements SokoView.SokoTouchListener
 			toast.show();
 		}
 		return success;
+	}
+	@Override
+	public boolean onKeyDown (int keyCode, KeyEvent event) {
+		if(keyCode==KeyEvent.KEYCODE_DPAD_DOWN || keyCode==KeyEvent.KEYCODE_J ||
+				keyCode==KeyEvent.KEYCODE_NUMPAD_8) {
+			scrollHalfScreen(0,1);
+		} else if(keyCode==KeyEvent.KEYCODE_DPAD_LEFT || keyCode==KeyEvent.KEYCODE_H ||
+				keyCode==KeyEvent.KEYCODE_NUMPAD_4) {
+			scrollHalfScreen(-1,0);
+		} else if(keyCode==KeyEvent.KEYCODE_DPAD_UP || keyCode==KeyEvent.KEYCODE_K ||
+				keyCode==KeyEvent.KEYCODE_NUMPAD_2) {
+			scrollHalfScreen(0,-1);
+		} else if(keyCode==KeyEvent.KEYCODE_DPAD_RIGHT || keyCode==KeyEvent.KEYCODE_L ||
+				keyCode==KeyEvent.KEYCODE_NUMPAD_6) {
+			scrollHalfScreen(1,0);
+		} else if(keyCode==KeyEvent.KEYCODE_Q) {
+			onSelectMoveTool(null);
+		} else if(keyCode==KeyEvent.KEYCODE_W) {
+			onSelectWallTool(null);
+		} else if(keyCode==KeyEvent.KEYCODE_E) {
+			onSelectFloorTool(null);
+		} else if(keyCode==KeyEvent.KEYCODE_R) {
+			onSelectParcelTool(null);
+		} else if(keyCode==KeyEvent.KEYCODE_T) {
+			onSelectPlayerTool(null);
+		} else if(keyCode==KeyEvent.KEYCODE_Y) {
+			onSelectRuboutTool(null);
+		} else if(keyCode==KeyEvent.KEYCODE_PAGE_DOWN) {
+			action_gotoStage(+1);
+		} else if(keyCode==KeyEvent.KEYCODE_PAGE_UP) {
+			action_gotoStage(-1);
+		} else {
+			return super.onKeyDown(keyCode, event);
+		}
+		return true;
+	}
+	private void scrollHalfScreen(int diffx, int diffy) {
+		int halfOffsU=gameView.getWidth()/2;
+		int halfOffsV=gameView.getHeight()/2;
+		int newOffsU=state.viewOffsU()-diffx*halfOffsU;
+		int newOffsV=state.viewOffsV()-diffy*halfOffsV;
+		int limOffsU=Math.max(gameView.minOffsU(), Math.min(gameView.maxOffsU(), newOffsU));
+		int limOffsV=Math.max(gameView.minOffsV(), Math.min(gameView.maxOffsV(), newOffsV));
+		state.setViewOffs(limOffsU, limOffsV);
+		if(anim==null) { initAnimator(); }
+		anim.start();
+	}
+	private void initAnimator() {
+		anim=ValueAnimator.ofFloat(0.f,1.f);
+		anim.setDuration(50);
+		anim.addUpdateListener(this);
+	}
+	@Override
+	public void onAnimationUpdate(ValueAnimator animation) {
+		state.animProgress=(Float)animation.getAnimatedValue();
+		gameView.invalidate();
 	}
 }
