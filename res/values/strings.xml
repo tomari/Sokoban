@@ -50,6 +50,8 @@
 	<string name="title_activity_edit">Edit</string>
 	<string name="action_about">About</string>
 	<string name="aboutdialog_title">About %s</string>
-	<string name="aboutdialog_text">Version %s\nCopyright (C) 2013\u0020\u0020Hisanobu Tomari.\nThis program comes with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to redistribute it under certain conditions [GPLv3]; see the source for details.\nSee http://example.com/ for sources and add-on stage data.</string>
+	<string name="aboutdialog_text">Version %s\nCopyright (C) 2013\u0020\u0020Hisanobu Tomari.\nThis program comes with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to redistribute it under certain conditions [GPLv3]; see the source for details.\nSee http://davy.nyacom.net/drsoko/ for sources and add-on stage data.</string>
 	<string name="aboutdialog_dismiss">Dismiss</string>
+	<string name="aboutdialog_visitsite">Visit website</string>
+	<string name="url_website">http://davy.nyacom.net/drsoko/</string>
 </resources>

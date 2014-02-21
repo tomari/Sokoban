@@ -8,6 +8,7 @@ import java.util.Map;
 
 import org.apache.http.protocol.HTTP;
 
+import android.net.Uri;
 import android.os.Bundle;
 import android.app.AlertDialog;
 import android.app.ListActivity;
@@ -346,6 +347,14 @@ public class SokoSelActivity extends ListActivity {
 				versionName);
 		AlertDialog.Builder about=new AlertDialog.Builder(this);
 		about.setTitle(title).setMessage(msg).setPositiveButton(R.string.aboutdialog_dismiss, null)
+		.setNeutralButton(R.string.aboutdialog_visitsite, new DialogInterface.OnClickListener() {
+			@Override
+			public void onClick(DialogInterface dialog, int which) {
+				Intent intent=new Intent(Intent.ACTION_VIEW);
+				intent.setData(Uri.parse(getResources().getString(R.string.url_website)));
+				startActivity(intent);
+			}
+		})
 		.show();
 	}
 }
