@@ -1,6 +1,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
 	<item
+		android:id="@+id/action_undo"
+		android:orderInCategory="190"
+		android:showAsAction="ifRoom"
+		android:alphabeticShortcut="z"
+		android:title="@string/action_undo"
+		android:icon="@drawable/content_undo" />
+	<item
 		android:id="@+id/action_retry"
 		android:orderInCategory="200"
 		android:showAsAction="ifRoom"
@@ -10,14 +17,14 @@
 	<item
 		android:id="@+id/action_nextstage"
 		android:orderInCategory="220"
-		android:showAsAction="always"
+		android:showAsAction="ifRoom"
 		android:icon="@drawable/nav_next"
 		android:alphabeticShortcut="n"
 		android:title="@string/action_nextstage" />
 	<item
 		android:id="@+id/action_prevstage"
 		android:orderInCategory="210"
-		android:showAsAction="always"
+		android:showAsAction="ifRoom"
 		android:icon="@drawable/nav_prev"
 		android:alphabeticShortcut="p"
 		android:title="@string/action_prevstage" />

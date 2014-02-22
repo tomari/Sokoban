@@ -23,6 +23,7 @@ public class SokoGameState implements Serializable {
 	public static final int MAX_STAGE=256;
 	public int loaded_stages=0;
 	private int targets;
+	private boolean last_parcel=false;
 	public SokoGameState(String path) {
 		stagesFilename=path;
 		steps=0;
@@ -39,6 +40,7 @@ public class SokoGameState implements Serializable {
 			chrx=dstx;
 			chry=dsty;
 			steps++;
+			last_parcel=false;
 			res=true;
 		} else if(dstChr=='o' || dstChr=='0') {
 			int dst2x=chrx+2*deltax;
@@ -61,6 +63,7 @@ public class SokoGameState implements Serializable {
 			chrx=dstx;
 			chry=dsty;
 			steps++;
+			last_parcel=true;
 			res=true;
 		} else {
 			return false;
@@ -154,5 +157,27 @@ public class SokoGameState implements Serializable {
 		roomWidth=newWidth;
 		roomHeight=newHeight;
 		return true;
+	}
+	public boolean undoLastMove() {
+		if(lastChrX==chrx && lastChrY==chry) {
+			return false;
+		} else {
+			if(last_parcel) {
+				int deltax=chrx-lastChrX;
+				int deltay=chry-lastChrY;
+				int parcelx=lastChrX+deltax*2;
+				int parcely=lastChrY+deltay*2;
+				char cp=room[parcely][parcelx];
+				char nc=(cp=='0')?'x':'.';
+				room[parcely][parcelx]=nc;
+				char cc=room[chry][chrx];
+				char nc2=(cc=='x')?'0':'o';
+				room[chry][chrx]=nc2;
+			}
+			chrx=lastChrX;
+			chry=lastChrY;
+			steps--;
+			return true;
+		}
 	}
 }

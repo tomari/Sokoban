@@ -20,6 +20,7 @@
 	<string name="action_clearhs">Clear highscores</string>
 	<string name="action_new">New</string>
 	<string name="action_edit">Edit</string>
+	<string name="action_undo">Undo</string>
 	<string name="title_export">Share which?</string>
 	<string name="title_chooser">Share &#8220;%s&#8221; using&#8230;</string>
 	<string name="title_delete">Delete which?</string>

@@ -137,6 +137,8 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 			goRight(null);
 		} else if(keyCode==KeyEvent.KEYCODE_R) {
 			retryThisStage();
+		} else if(keyCode==KeyEvent.KEYCODE_Z) {
+			undoLastMove();
 		} else if(keyCode==KeyEvent.KEYCODE_PAGE_DOWN) {
 			gotoStage(state.stage+1);
 		} else if(keyCode==KeyEvent.KEYCODE_PAGE_UP) {
@@ -163,6 +165,8 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 			gotoStage(state.stage-1);
 		} else if(itemid==R.id.action_goto) {
 			pickStage();
+		} else if(itemid==R.id.action_undo) {
+			undoLastMove();
 		} else {
 			return super.onMenuItemSelected(featureId, item);
 		}
@@ -320,5 +324,11 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 		lowstepsView.setText(hslabel);
 		TextView stepsView=(TextView)findViewById(R.id.scoreLabel);
 		stepsView.setText(numFormat.format(state.steps));
+	}
+	private void undoLastMove() {
+		if(state.undoLastMove()) {
+			gameView.invalidate();
+			updateStatusDisplay();
+		}
 	}
 }
