@@ -22,7 +22,6 @@ import android.widget.Toast;
 public class SokoActivity extends Activity implements SokoView.SokoTouchListener,ValueAnimator.AnimatorUpdateListener {
 	private SokoGameState state;
 	private SokoView gameView;
-	private TextView lowstepsView, stepsView;
 	private NumberFormat numFormat=NumberFormat.getInstance();
 	private ValueAnimator anim;
 	private final String SAVELABEL_STATE="state";
@@ -46,10 +45,7 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_soko);
 		getActionBar().setDisplayHomeAsUpEnabled(true);
-		//View controlPanel=findViewById(R.id.controlPanel);
 		gameView=(SokoView)findViewById(R.id.gameView);
-		lowstepsView=(TextView)findViewById(R.id.highscoreLabel);
-		stepsView=(TextView)findViewById(R.id.scoreLabel);
 		String path=this.getIntent().getExtras().getString(STARTINTENT_FILENAME);
 		highscores=new HighscoreMgr(this,path);
 		highscores.load();
@@ -60,6 +56,7 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 			}
 		} else {
 			state=(SokoGameState)savedInstanceState.getSerializable(SAVELABEL_STATE);
+			updateStatusDisplay();
 		}
 		gameView.setGameState(state);
 		if(savedInstanceState==null) {
@@ -138,7 +135,6 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 	}
 	private void retryThisStage() {
 		gotoStage(state.stage);
-		stepsView.setText(numFormat.format(state.steps));
 		gameView.invalidate();
 	}
 	@Override
@@ -177,6 +173,7 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 			if(state.isFinished()) {
 				handleStageClear();
 			}
+			TextView stepsView=(TextView)findViewById(R.id.scoreLabel);
 			stepsView.setText(numFormat.format(state.steps));
 			calculateViewPort();
 			state.animProgress=0.f;
@@ -266,25 +263,15 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 		}
 		if(res) {
 			backStack=oldStg;
-			getActionBar().setTitle(state.stageTitle);
 			state.steps=0;
 			calculateViewPort();
-			int highscore_num=highscores.scoreOfStage(stage);
-			String hslabel;
-			if(highscore_num==0) {
-				hslabel=getResources().getString(R.string.highscore_never);
-			} else {
-				hslabel=numFormat.format(highscore_num);
-			}
-			lowstepsView.setText(hslabel);
-			stepsView.setText(numFormat.format(state.steps));
 			gameView.invalidate();
 		} else {
 			boolean isFirst=stage<1;
 			toast=Toast.makeText(this, isFirst?R.string.toast_fst:R.string.toast_last, Toast.LENGTH_SHORT);
 			toast.show();
 		}
-		
+		updateStatusDisplay();
 		return res;
 	}
 	private void pickStage() {
@@ -306,5 +293,19 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 		} else {
 			super.onBackPressed();
 		}
+	}
+	private void updateStatusDisplay() {
+		int highscore_num=highscores.scoreOfStage(state.stage);
+		String hslabel;
+		if(highscore_num==0) {
+			hslabel=getResources().getString(R.string.highscore_never);
+		} else {
+			hslabel=numFormat.format(highscore_num);
+		}
+		getActionBar().setTitle(state.stageTitle);
+		TextView lowstepsView=(TextView)findViewById(R.id.highscoreLabel);
+		lowstepsView.setText(hslabel);
+		TextView stepsView=(TextView)findViewById(R.id.scoreLabel);
+		stepsView.setText(numFormat.format(state.steps));
 	}
 }

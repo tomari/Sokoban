@@ -41,6 +41,7 @@ public class EditActivity extends Activity implements SokoView.SokoTouchListener
 		} else {
 			state=(SokoGameState)savedInstanceState.getSerializable(SAVELABEL_STATE);
 			Tool lastTool=(Tool)savedInstanceState.getSerializable(SAVELABEL_TOOL);
+			getActionBar().setTitle(state.stageTitle);
 			if(lastTool!=null) {
 				onSelectTool(lastTool);
 			}
