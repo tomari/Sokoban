@@ -168,10 +168,22 @@ public class SokoGameState implements Serializable {
 				int parcelx=lastChrX+deltax*2;
 				int parcely=lastChrY+deltay*2;
 				char cp=room[parcely][parcelx];
-				char nc=(cp=='0')?'x':'.';
+				char nc;
+				if(cp=='0') {
+					targets++;
+					nc='x';
+				} else {
+					nc='.';
+				}
 				room[parcely][parcelx]=nc;
 				char cc=room[chry][chrx];
-				char nc2=(cc=='x')?'0':'o';
+				char nc2;
+				if(cc=='x') {
+					nc2='0';
+					targets--;
+				} else {
+					nc2='o';
+				}
 				room[chry][chrx]=nc2;
 			}
 			chrx=lastChrX;
