@@ -14,9 +14,20 @@ foreach(@ARGV) {
   open(my $src, '<', $_) or die "$!";
   my ($basename, $dirname, $ext) = fileparse($_,qr/\.[^\/]*$/);
   print "--\n";
-  print $basename."\n";
+  my $title_done=0;
   while(<$src>) {
     $_ =~ s/\n$//;
+    if($_ =~ /^\s*$/) {
+      next;
+    } elsif($_ =~ /^\'(.+)\'$/) {
+      print $1."\n";
+      $title_done=1;
+      next;
+    }
+    if(!$title_done) {
+      print $basename."\n";
+      $title_done=1;
+    }
     my @chrs=split(//,$_);
     my $prevwall=0;
     my $inside=0;
@@ -42,8 +53,11 @@ foreach(@ARGV) {
 	} elsif($_ eq '@') {
 	  print '@';
 	} elsif($_ eq '*') {
-	  # i dunno
-	  print '.';
+	  print '0';
+	} elsif($_ eq '+') {
+	  print '+';
+	} else {
+	  print STDERR "unknown character: ".$_."\n";
 	}
 	#$prevwall=0;
       }
