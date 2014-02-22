@@ -34,7 +34,12 @@ public class SokoGameState implements Serializable {
 		int dsty=chry+deltay;
 		int chrxbuf=chrx;
 		int chrybuf=chry;
-		char dstChr=room[dsty][dstx];
+		char dstChr;
+		try {
+			dstChr=room[dsty][dstx];
+		} catch (ArrayIndexOutOfBoundsException e) {
+			dstChr='#';
+		}
 		boolean res;
 		if(dstChr=='.' || dstChr=='x') {
 			chrx=dstx;
@@ -45,7 +50,12 @@ public class SokoGameState implements Serializable {
 		} else if(dstChr=='o' || dstChr=='0') {
 			int dst2x=chrx+2*deltax;
 			int dst2y=chry+2*deltay;
-			char dst2Chr=room[dst2y][dst2x];
+			char dst2Chr;
+			try {
+				dst2Chr=room[dst2y][dst2x];
+			} catch (ArrayIndexOutOfBoundsException e) {
+				dst2Chr='#';
+			}
 			if(dst2Chr=='.') {
 				room[dst2y][dst2x]='o';
 			} else if(dst2Chr=='x') {
