@@ -4,7 +4,9 @@ import android.os.Bundle;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.view.KeyEvent;
 //import android.util.Log;
 import android.view.Menu;
@@ -24,6 +26,8 @@ public class EditActivity extends Activity implements SokoView.SokoTouchListener
 	private boolean dirty;
 	private Toast toast;
 	private ValueAnimator anim=null;
+	private static final String PREF_EDITSCALE="editscale";
+	private static final float default_editscale=1.f;
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
@@ -36,6 +40,8 @@ public class EditActivity extends Activity implements SokoView.SokoTouchListener
 		if(savedInstanceState==null) {
 			state=new SokoGameState(path);
 			state.editMode=true;
+			SharedPreferences shrP=getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
+			state.scale=shrP.getFloat(PREF_EDITSCALE, default_editscale);
 			gotoStage(1);
 			onSelectTool(Tool.Move);
 		} else {
@@ -57,6 +63,13 @@ public class EditActivity extends Activity implements SokoView.SokoTouchListener
 	public void onPause() {
 		super.onPause();
 		saveStage();
+		SharedPreferences shrP=getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
+		float scale=shrP.getFloat(PREF_EDITSCALE, default_editscale);
+		if(scale!=state.scale) {
+			SharedPreferences.Editor e=shrP.edit();
+			e.putFloat(PREF_EDITSCALE, state.scale);
+			e.commit();
+		}
 	}
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {

@@ -7,6 +7,7 @@ import android.preference.PreferenceManager;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.view.KeyEvent;
@@ -29,6 +30,8 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 	public static final String STARTINTENT_FILENAME="stagesFile";
 	private int backStack;
 	private Toast toast;
+	private static final String PREF_GAMESCALE="gamescale";
+	private static final float default_scale=1.f;
 	private class ViewPortAdjuster implements ViewTreeObserver.OnPreDrawListener {
 		private boolean firsttime=true;
 		@Override
@@ -51,6 +54,8 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 		highscores.load();
 		if(savedInstanceState==null) {
 			state=new SokoGameState(path);
+			SharedPreferences shrP=getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
+			state.scale=shrP.getFloat(PREF_GAMESCALE, default_scale);
 			if(!gotoStage(highscores.minUnclearedStage(),false)) {
 				gotoStage(1,false);
 			}
@@ -97,6 +102,14 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 	public void onPause() {
 		super.onPause();
 		highscores.save();
+		SharedPreferences shrP=getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
+		float scale=shrP.getFloat(PREF_GAMESCALE, default_scale);
+		if(scale!=state.scale) {
+			SharedPreferences.Editor e=shrP.edit();
+			e.putFloat(PREF_GAMESCALE, state.scale);
+			e.commit();
+		}
+
 	}
 	@Override
 	public void onSaveInstanceState(Bundle savedInstanceState) {
