@@ -71,11 +71,9 @@ public class SokoFileWriter {
 		int chry=gameState.chrY();
 		for(int y=ymin; y<=ymax; y++) {
 			for(int x=glo_xmin; x<=xmax[y]; x++) {
-				char c;
+				char c=gameState.room[y][x];
 				if(x==chrx && y==chry) {
-					c='@';
-				} else {
-					c=gameState.room[y][x];
+					c=(c=='x')?'+':'@';
 				}
 				bw.write(c);
 			}

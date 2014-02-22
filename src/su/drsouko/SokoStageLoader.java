@@ -104,6 +104,10 @@ public class SokoStageLoader {
 							chrx=x;
 							chry=y;
 							c='.';
+						} else if(c=='+') {
+							chrx=x;
+							chry=y;
+							c='x';
 						}
 						if(c=='x') { targets++; }
 						room[y][x]=c;

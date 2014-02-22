@@ -146,11 +146,11 @@ public class EditActivity extends Activity implements SokoView.SokoTouchListener
 		}
 		return success;
 	}
-	private char mapStateToSokoChar() {
+	private char mapStateToSokoChar(char org) {
 		char res;
 		if(currentToolSelection==Tool.Wall) { res='#'; }
 		else if(currentToolSelection==Tool.Floor) { res='.'; }
-		else if(currentToolSelection==Tool.Parcel) { res='o'; }
+		else if(currentToolSelection==Tool.Parcel) { res=(org=='x')?'0':'o'; }
 		else if(currentToolSelection==Tool.Target) { res='x'; }
 		else { res=' '; }
 		return res;
@@ -187,11 +187,11 @@ public class EditActivity extends Activity implements SokoView.SokoTouchListener
 		//
 		dirty=true;
 		if(currentToolSelection==Tool.Player) {
-			if(state.room[y][x]=='.') {
+			if(state.room[y][x]=='.' || state.room[y][x]=='x') {
 				state.setChrXY(x, y, true);
 			}
 		} else {
-			char c=mapStateToSokoChar();
+			char c=mapStateToSokoChar(state.room[y][x]);
 			state.room[y][x]=c;
 		}
 		gameView.invalidate();
