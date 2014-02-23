@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<string name="ivdescr_currentSel">選択中</string>
+	<string name="ibdescr_wall">壁</string>
+	<string name="ibdescr_floor">床</string>
+	<string name="ibdescr_parcel">荷物</string>
+	<string name="ibdescr_target">置き場</string>
+	<string name="ibdescr_player">プレイヤー</string>
+	<string name="ibdescr_handtool">移動</string>
+	<string name="ibdescr_rubout">修正</string>
+	<string name="action_settitle">タイトルを設定&#8230;</string>
+	<string name="action_add">ステージ追加</string>
+	<string name="action_remove">ステージ削除</string>
+	<string name="action_swap">ステージの順序</string>
+	<string name="action_dup">ステージ複製</string>
+	<string name="titledialog_filetitlehint">ファイルのタイトル</string>
+	<string name="titledialog_filecopyhint">ファイルの説明</string>
+	<string name="titledialog_stagetitlehint">ステージのタイトル</string>
+	<string name="titledialog_setbutton">設定</string>
+	<string name="titledialog_title">タイトルの設定</string>
+	<string name="dialog_remove_title">このステージを削除しますか?</string>
+	<string name="dialog_remove_text">&#8220;%s&#8221;を削除しますか?</string>
+	<string name="dialog_remove_go">削除</string>
+	<string name="dialog_swap_title">&#8220;%s&#8221;を選択したステージの直前に配置&#8230;</string>
+	<string name="toast_dupcomplete">ステージを複製しました</string>
+</resources>

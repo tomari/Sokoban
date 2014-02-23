@@ -1,0 +1,12 @@
+<resources>
+
+	<string name="title_activity_settings">設定</string>
+	<string name="preflabel_control_place">矢印ボタンの位置</string>
+	<string-array name="pref_control_place">
+		<item>中央</item>
+		<item>右</item>
+		<item>左</item>
+		<item>表示しない</item>
+	</string-array>
+	<string name="preflabel_enable_sound">効果音</string>
+</resources>
