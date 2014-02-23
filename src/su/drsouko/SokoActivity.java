@@ -64,11 +64,10 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 			updateStatusDisplay();
 		}
 		gameView.setGameState(state);
-		if(savedInstanceState==null) {
-			ViewTreeObserver vto=gameView.getViewTreeObserver();
-			ViewPortAdjuster vpa=new ViewPortAdjuster();
-			vto.addOnPreDrawListener(vpa);
-		}
+		ViewTreeObserver vto=gameView.getViewTreeObserver();
+		ViewPortAdjuster vpa=new ViewPortAdjuster();
+		vto.addOnPreDrawListener(vpa);
+		
 		gameView.setSokoTouchListener(this);
 		//
 		anim=ValueAnimator.ofFloat(0.f,1.f);
