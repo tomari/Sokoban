@@ -323,21 +323,23 @@ public class EditActivity extends Activity implements SokoView.SokoTouchListener
 		} else if(keyCode==KeyEvent.KEYCODE_DPAD_RIGHT || keyCode==KeyEvent.KEYCODE_L ||
 				keyCode==KeyEvent.KEYCODE_NUMPAD_6) {
 			scrollHalfScreen(1,0);
-		} else if(keyCode==KeyEvent.KEYCODE_Q) {
+		} else if(keyCode==KeyEvent.KEYCODE_Q || keyCode==KeyEvent.KEYCODE_BUTTON_C) {
 			onSelectMoveTool(null);
-		} else if(keyCode==KeyEvent.KEYCODE_W) {
+		} else if(keyCode==KeyEvent.KEYCODE_W || keyCode==KeyEvent.KEYCODE_BUTTON_A) {
 			onSelectWallTool(null);
-		} else if(keyCode==KeyEvent.KEYCODE_E) {
+		} else if(keyCode==KeyEvent.KEYCODE_E || keyCode==KeyEvent.KEYCODE_BUTTON_B) {
 			onSelectFloorTool(null);
-		} else if(keyCode==KeyEvent.KEYCODE_R) {
+		} else if(keyCode==KeyEvent.KEYCODE_R || keyCode==KeyEvent.KEYCODE_BUTTON_X) {
 			onSelectParcelTool(null);
-		} else if(keyCode==KeyEvent.KEYCODE_T) {
-			onSelectPlayerTool(null);
+		} else if(keyCode==KeyEvent.KEYCODE_T || keyCode==KeyEvent.KEYCODE_BUTTON_Y) {
+			onSelectParcelTool(null);
 		} else if(keyCode==KeyEvent.KEYCODE_Y) {
+			onSelectPlayerTool(null);
+		} else if(keyCode==KeyEvent.KEYCODE_U || keyCode==KeyEvent.KEYCODE_BUTTON_Z) {
 			onSelectRuboutTool(null);
-		} else if(keyCode==KeyEvent.KEYCODE_PAGE_DOWN) {
+		} else if(keyCode==KeyEvent.KEYCODE_PAGE_DOWN || keyCode==KeyEvent.KEYCODE_BUTTON_R1) {
 			action_gotoStage(+1);
-		} else if(keyCode==KeyEvent.KEYCODE_PAGE_UP) {
+		} else if(keyCode==KeyEvent.KEYCODE_PAGE_UP || keyCode==KeyEvent.KEYCODE_BUTTON_L1) {
 			action_gotoStage(-1);
 		} else {
 			return super.onKeyDown(keyCode, event);

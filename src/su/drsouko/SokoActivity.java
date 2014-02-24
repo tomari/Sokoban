@@ -134,14 +134,16 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 		} else if(keyCode==KeyEvent.KEYCODE_DPAD_RIGHT || keyCode==KeyEvent.KEYCODE_L ||
 				keyCode==KeyEvent.KEYCODE_NUMPAD_6) {
 			goRight(null);
-		} else if(keyCode==KeyEvent.KEYCODE_R) {
+		} else if(keyCode==KeyEvent.KEYCODE_R || keyCode==KeyEvent.KEYCODE_BUTTON_B) {
 			retryThisStage();
-		} else if(keyCode==KeyEvent.KEYCODE_Z) {
+		} else if(keyCode==KeyEvent.KEYCODE_Z || keyCode==KeyEvent.KEYCODE_BUTTON_A) {
 			undoLastMove();
-		} else if(keyCode==KeyEvent.KEYCODE_PAGE_DOWN) {
+		} else if(keyCode==KeyEvent.KEYCODE_PAGE_DOWN || keyCode==KeyEvent.KEYCODE_BUTTON_R1) {
 			gotoStage(state.stage+1);
-		} else if(keyCode==KeyEvent.KEYCODE_PAGE_UP) {
+		} else if(keyCode==KeyEvent.KEYCODE_PAGE_UP || keyCode==KeyEvent.KEYCODE_BUTTON_L1) {
 			gotoStage(state.stage-1);
+		} else if(keyCode==KeyEvent.KEYCODE_BUTTON_Y) {
+			pickStage();
 		} else {
 			return super.onKeyDown(keyCode, event);
 		}
