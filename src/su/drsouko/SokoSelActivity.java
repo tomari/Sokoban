@@ -74,6 +74,7 @@ public class SokoSelActivity extends ListActivity {
 	}
 	private void loadFilelist() {
 		files=new LinkedList<Map<String,String>>();
+		addFile(null); // add internal stages
 		File filesDir=getFilesDir();
 		File[] dir=filesDir.listFiles(new FilenameFilter() {
 			@Override
@@ -81,7 +82,12 @@ public class SokoSelActivity extends ListActivity {
 				return filename.endsWith(STAGEFILE_SUFFIX);
 			}
 		});
-		addFile(null); // add internal stages
+		java.util.Arrays.sort(dir,new java.util.Comparator<File>() {
+			@Override
+			public int compare(File lhs, File rhs) {
+				return lhs.getPath().compareTo(rhs.getPath());
+			}
+		});
 		for(File f:dir) {
 			addFile(f.getPath());
 		}
@@ -249,7 +255,6 @@ public class SokoSelActivity extends ListActivity {
 				nextnum++;
 				continue;
 			} else {
-				//Log.println(Log.DEBUG, getPackageName(), "Create a file "+filenameCandidate);
 				return filenameCandidate;
 			}
 		} while(max_try-->0);
