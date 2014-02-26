@@ -2,12 +2,12 @@ package su.drsouko;
 
 import java.text.NumberFormat;
 
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.view.KeyEvent;
@@ -32,6 +32,10 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 	private Toast toast;
 	private static final String PREF_GAMESCALE="gamescale";
 	private static final float default_scale=1.f;
+	private SoundPool sp;
+	private boolean sound;
+	private int snd_walk1, snd_walk2, snd_walk3, snd_clearhs, 
+				snd_clear, snd_retry, snd_undo;
 	private class ViewPortAdjuster implements ViewTreeObserver.OnPreDrawListener {
 		private boolean firsttime=true;
 		@Override
@@ -52,9 +56,11 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 		String path=this.getIntent().getExtras().getString(STARTINTENT_FILENAME);
 		highscores=new HighscoreMgr(this,path);
 		highscores.load();
+		SharedPreferences shrP=PreferenceManager.getDefaultSharedPreferences(this);
+		sound=shrP.getBoolean(SettingsActivity.PREF_SOUND, true);
+		initSound();
 		if(savedInstanceState==null) {
 			state=new SokoGameState(path);
-			SharedPreferences shrP=getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
 			state.scale=shrP.getFloat(PREF_GAMESCALE, default_scale);
 			if(!gotoStage(highscores.minUnclearedStage(),false)) {
 				gotoStage(1,false);
@@ -101,7 +107,7 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 	public void onPause() {
 		super.onPause();
 		highscores.save();
-		SharedPreferences shrP=getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
+		SharedPreferences shrP=PreferenceManager.getDefaultSharedPreferences(this);
 		float scale=shrP.getFloat(PREF_GAMESCALE, default_scale);
 		if(scale!=state.scale) {
 			SharedPreferences.Editor e=shrP.edit();
@@ -150,6 +156,7 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 		return true;
 	}
 	private void retryThisStage() {
+		playSound(snd_retry);
 		gotoStage(state.stage);
 		gameView.invalidate();
 	}
@@ -190,6 +197,8 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 		if(success) {
 			if(state.isFinished()) {
 				handleStageClear();
+			} else {
+				playWalkSound();
 			}
 			TextView stepsView=(TextView)findViewById(R.id.scoreLabel);
 			stepsView.setText(numFormat.format(state.steps));
@@ -201,6 +210,7 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 	}
 	private void handleStageClear() {
 		boolean newHS=highscores.putScore(state.stage, state.steps);
+		playSound(newHS?snd_clearhs:snd_clear);
 		String text=String.format(
 				(String)getResources().getText(newHS?R.string.text_newhs:R.string.text_clear), 
 				state.stageTitle);
@@ -328,8 +338,36 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 	}
 	private void undoLastMove() {
 		if(state.undoLastMove()) {
+			playSound(snd_undo);
 			gameView.invalidate();
 			updateStatusDisplay();
+		}
+	}
+	private void initSound() {
+		if(sound) {
+			sp=new SoundPool(4, android.media.AudioManager.STREAM_MUSIC, 0);
+			snd_walk1=sp.load(this, R.raw.walk1,1);
+			snd_walk2=sp.load(this, R.raw.walk2,1);
+			snd_walk3=sp.load(this, R.raw.walk3,1);
+			snd_retry=sp.load(this, R.raw.retry,1);
+			snd_clearhs=sp.load(this,  R.raw.clear_hs,1);
+			snd_clear=sp.load(this, R.raw.clear,1);
+			snd_undo=sp.load(this, R.raw.undo,1);
+		}
+	}
+	private void playWalkSound() {
+		int sndid;
+		if(state.isLastMoveParcel()) {
+			sndid=snd_walk3;
+		} else {
+			boolean parity=((state.chrX()&1)>0)^((state.chrY()&1)>0);
+			sndid=parity?snd_walk1:snd_walk2;
+		}
+		playSound(sndid);
+	}
+	private void playSound(int sndId) {
+		if(sound) {
+			sp.play(sndId, 1.f, 1.f, 0, 0, 1.f);
 		}
 	}
 }

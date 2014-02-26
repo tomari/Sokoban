@@ -10,6 +10,7 @@ import android.view.MenuItem;
 
 public class SettingsActivity extends Activity {
 	public static final String PREF_CTRLPLACE="control_button_placement";
+	public static final String PREF_SOUND="enable_sound";
 	public static class SettingsFragment extends PreferenceFragment implements OnSharedPreferenceChangeListener{
 		@Override
 		public void onCreate(Bundle savedInstanceState) {

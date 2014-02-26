@@ -1,10 +1,10 @@
 package su.drsouko;
 
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.view.KeyEvent;
@@ -40,7 +40,7 @@ public class EditActivity extends Activity implements SokoView.SokoTouchListener
 		if(savedInstanceState==null) {
 			state=new SokoGameState(path);
 			state.editMode=true;
-			SharedPreferences shrP=getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
+			SharedPreferences shrP=PreferenceManager.getDefaultSharedPreferences(this);
 			state.scale=shrP.getFloat(PREF_EDITSCALE, default_editscale);
 			gotoStage(1);
 			onSelectTool(Tool.Move);
@@ -63,7 +63,7 @@ public class EditActivity extends Activity implements SokoView.SokoTouchListener
 	public void onPause() {
 		super.onPause();
 		saveStage();
-		SharedPreferences shrP=getSharedPreferences(getPackageName(), Context.MODE_PRIVATE);
+		SharedPreferences shrP=PreferenceManager.getDefaultSharedPreferences(this);
 		float scale=shrP.getFloat(PREF_EDITSCALE, default_editscale);
 		if(scale!=state.scale) {
 			SharedPreferences.Editor e=shrP.edit();

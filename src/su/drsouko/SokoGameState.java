@@ -94,6 +94,7 @@ public class SokoGameState implements Serializable {
 	public int viewOffsV() { return viewOffsV; }
 	public int lastViewOffsU() { return lastViewOffsU; }
 	public int lastViewOffsV() { return lastViewOffsV; }
+	public boolean isLastMoveParcel() { return last_parcel; }
 	public void setViewOffs(int u,int v) {
 		lastViewOffsU=viewOffsU;
 		lastViewOffsV=viewOffsV;
