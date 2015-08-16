@@ -33,7 +33,7 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 	private static final String PREF_GAMESCALE="gamescale";
 	private static final float default_scale=1.f;
 	private SoundPool sp;
-	private boolean sound;
+	private boolean sound=false;
 	private int snd_walk1, snd_walk2, snd_walk3, snd_clearhs, 
 				snd_clear, snd_retry, snd_undo;
 	private class ViewPortAdjuster implements ViewTreeObserver.OnPreDrawListener {
@@ -50,15 +50,24 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		final SharedPreferences shrP=PreferenceManager.getDefaultSharedPreferences(this);
+		Thread snd_init=new Thread(new Runnable() {
+			@Override
+			public void run() {
+				boolean snd_i=shrP.getBoolean(SettingsActivity.PREF_SOUND, true);
+				if(snd_i) {
+					initSound();
+					sound = snd_i;
+				}
+			}
+		});
+		snd_init.run();
 		setContentView(R.layout.activity_soko);
+		final String path=this.getIntent().getExtras().getString(STARTINTENT_FILENAME);
+		highscores=new HighscoreMgr(SokoActivity.this,path);
+		highscores.load();
 		getActionBar().setDisplayHomeAsUpEnabled(true);
 		gameView=(SokoView)findViewById(R.id.gameView);
-		String path=this.getIntent().getExtras().getString(STARTINTENT_FILENAME);
-		highscores=new HighscoreMgr(this,path);
-		highscores.load();
-		SharedPreferences shrP=PreferenceManager.getDefaultSharedPreferences(this);
-		sound=shrP.getBoolean(SettingsActivity.PREF_SOUND, true);
-		initSound();
 		if(savedInstanceState==null) {
 			state=new SokoGameState(path);
 			state.scale=shrP.getFloat(PREF_GAMESCALE, default_scale);
@@ -344,16 +353,14 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 		}
 	}
 	private void initSound() {
-		if(sound) {
-			sp=new SoundPool(4, android.media.AudioManager.STREAM_MUSIC, 0);
-			snd_walk1=sp.load(this, R.raw.walk1,1);
-			snd_walk2=sp.load(this, R.raw.walk2,1);
-			snd_walk3=sp.load(this, R.raw.walk3,1);
-			snd_retry=sp.load(this, R.raw.retry,1);
-			snd_clearhs=sp.load(this,  R.raw.clear_hs,1);
-			snd_clear=sp.load(this, R.raw.clear,1);
-			snd_undo=sp.load(this, R.raw.undo,1);
-		}
+		sp=new SoundPool(4, android.media.AudioManager.STREAM_MUSIC, 0);
+		snd_walk1=sp.load(this, R.raw.walk1,1);
+		snd_walk2=sp.load(this, R.raw.walk2,1);
+		snd_walk3=sp.load(this, R.raw.walk3,1);
+		snd_retry=sp.load(this, R.raw.retry,1);
+		snd_clearhs=sp.load(this,  R.raw.clear_hs,1);
+		snd_clear=sp.load(this, R.raw.clear,1);
+		snd_undo=sp.load(this, R.raw.undo,1);
 	}
 	private void playWalkSound() {
 		int sndid;
