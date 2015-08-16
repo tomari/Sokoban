@@ -2,4 +2,7 @@
 <resources>
 	<color name="scoreBg">#7fff</color>
 	<color name="editor_toolbox_bg">#80f0</color>
+	<color name="primary">#d32f2f</color>
+	<color name="primary_dark">#b71c1c</color>
+	<color name="accent">#f44336</color>
 </resources>
