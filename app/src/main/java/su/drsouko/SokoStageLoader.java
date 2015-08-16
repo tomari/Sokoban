@@ -146,9 +146,9 @@ public class SokoStageLoader {
 				if(nread>0) {
 					String bufstr=String.valueOf(abuf);
 					if(nread<abuf.length) {
-						res+=bufstr.substring(0,nread);
+						res=res.concat(bufstr.substring(0,nread));
 					} else {
-						res+=bufstr;
+						res=res.concat(bufstr);
 					}
 				}
 			} while (nread>0);
