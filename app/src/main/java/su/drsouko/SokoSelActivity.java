@@ -6,8 +6,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 
-import org.apache.http.protocol.HTTP;
-
+import android.content.ClipDescription;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.AlertDialog;
@@ -43,7 +42,7 @@ public class SokoSelActivity extends ListActivity {
 		if(theIntent!=null) {
 			String action=theIntent.getAction();
 			String type=theIntent.getType();
-			if(HTTP.PLAIN_TEXT_TYPE.equals(type)) {
+			if(ClipDescription.MIMETYPE_TEXT_PLAIN.equals(type)) {
 				if(Intent.ACTION_VIEW.equals(action)|| Intent.ACTION_SEND.equals(action)) {
 					final String str_in=theIntent.getStringExtra(Intent.EXTRA_TEXT);
 					if(str_in!=null) {
@@ -137,7 +136,7 @@ public class SokoSelActivity extends ListActivity {
 	}
 	private void exportFile(int position) {
 		Intent intent=new Intent(Intent.ACTION_SEND);
-		intent.setType(HTTP.PLAIN_TEXT_TYPE);
+		intent.setType(ClipDescription.MIMETYPE_TEXT_PLAIN);
 		loader.setStagesFilename(files.get(position).get(COL_FILENAME));
 		String entireFile=loader.getEntireFile();
 		if(entireFile==null) { return; }
