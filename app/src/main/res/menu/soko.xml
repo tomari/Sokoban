@@ -6,26 +6,26 @@
 		android:showAsAction="ifRoom"
 		android:alphabeticShortcut="z"
 		android:title="@string/action_undo"
-		android:icon="@drawable/content_undo" />
+		android:icon="@drawable/ic_undo_24dp" />
 	<item
 		android:id="@+id/action_retry"
 		android:orderInCategory="200"
 		android:showAsAction="ifRoom"
 		android:alphabeticShortcut="r"
 		android:title="@string/action_retry"
-		android:icon="@drawable/nav_retry" />
+		android:icon="@drawable/ic_refresh_24dp" />
 	<item
 		android:id="@+id/action_nextstage"
 		android:orderInCategory="220"
 		android:showAsAction="ifRoom"
-		android:icon="@drawable/nav_next"
+		android:icon="@drawable/ic_arrow_forward_24dp"
 		android:alphabeticShortcut="n"
 		android:title="@string/action_nextstage" />
 	<item
 		android:id="@+id/action_prevstage"
 		android:orderInCategory="210"
 		android:showAsAction="ifRoom"
-		android:icon="@drawable/nav_prev"
+		android:icon="@drawable/ic_arrow_back_24dp"
 		android:alphabeticShortcut="p"
 		android:title="@string/action_prevstage" />
 	<item
