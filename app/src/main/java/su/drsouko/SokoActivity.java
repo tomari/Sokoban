@@ -4,6 +4,7 @@ import java.text.NumberFormat;
 
 import android.media.SoundPool;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.animation.ValueAnimator;
 import android.app.Activity;
@@ -36,6 +37,7 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 	private boolean sound=false;
 	private int snd_walk1, snd_walk2, snd_walk3, snd_clearhs, 
 				snd_clear, snd_retry, snd_undo;
+	private Handler handle;
 	private class ViewPortAdjuster implements ViewTreeObserver.OnPreDrawListener {
 		private boolean firsttime=true;
 		@Override
@@ -50,18 +52,18 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		handle=new Handler();
 		final SharedPreferences shrP=PreferenceManager.getDefaultSharedPreferences(this);
-		Thread snd_init=new Thread(new Runnable() {
+		new Thread() {
 			@Override
 			public void run() {
-				boolean snd_i=shrP.getBoolean(SettingsActivity.PREF_SOUND, true);
-				if(snd_i) {
+				boolean snd_i = shrP.getBoolean(SettingsActivity.PREF_SOUND, true);
+				if (snd_i) {
 					initSound();
 					sound = snd_i;
 				}
 			}
-		});
-		snd_init.run();
+		}.start();
 		setContentView(R.layout.activity_soko);
 		final String path=this.getIntent().getExtras().getString(STARTINTENT_FILENAME);
 		highscores=new HighscoreMgr(SokoActivity.this,path);
@@ -71,9 +73,7 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 		if(savedInstanceState==null) {
 			state=new SokoGameState(path);
 			state.scale=shrP.getFloat(PREF_GAMESCALE, default_scale);
-			if(!gotoStage(highscores.minUnclearedStage(),false)) {
-				gotoStage(1,false);
-			}
+			gotoStage(highscores.minUnclearedStage(),false);
 		} else {
 			state=(SokoGameState)savedInstanceState.getSerializable(SAVELABEL_STATE);
 			updateStatusDisplay();
@@ -284,32 +284,46 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 		state.animProgress=(Float)animation.getAnimatedValue();
 		gameView.invalidate();
 	}
-	private boolean gotoStage(int stage) { return gotoStage(stage,true); }
-	private boolean gotoStage(int stage,boolean showToast) {
-		boolean res;
-		int oldStg=0;
-		if(toast!=null) {
-			toast.cancel();
-			toast=null;
-		}
-		if(stage<1) {
-			res=false;
-		} else {
-			oldStg=state.stage;
-			res=state.loadStage(this,stage,false);
-		}
-		if(res) {
-			backStack=oldStg;
-			state.steps=0;
-			calculateViewPort();
-			gameView.invalidate();
-		} else {
-			boolean isFirst=stage<1;
-			toast=Toast.makeText(this, isFirst?R.string.toast_fst:R.string.toast_last, Toast.LENGTH_SHORT);
-			toast.show();
-		}
-		updateStatusDisplay();
-		return res;
+	private void gotoStage(final int stage) { gotoStage(stage, true); }
+	private void gotoStage(final int stage,final boolean showToast) {
+		new Thread() {
+			@Override
+			public void run() {
+				boolean res;
+				int oldStg=0;
+				if(toast!=null) {
+					toast.cancel();
+					toast=null;
+				}
+				if(stage<1) {
+					res=false;
+				} else {
+					oldStg=state.stage;
+					res=state.loadStage(SokoActivity.this,stage,false);
+				}
+				if(res) {
+					backStack=oldStg;
+					state.steps=0;
+					handle.post(new Runnable() {
+						@Override
+						public void run() {
+							calculateViewPort();
+							gameView.invalidate();
+						}
+					});
+				} else {
+					boolean isFirst=stage<1;
+					if(showToast) {
+						toast = Toast.makeText(SokoActivity.this, isFirst ? R.string.toast_fst : R.string.toast_last, Toast.LENGTH_SHORT);
+						toast.show();
+					}
+				}
+				handle.post(new Runnable() {
+					@Override
+					public void run() { updateStatusDisplay(); }
+				});
+			}
+		}.start();
 	}
 	private void pickStage() {
 		StagePicker sp=new StagePicker();
