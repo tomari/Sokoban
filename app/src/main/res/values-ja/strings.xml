@@ -47,7 +47,7 @@
 	<string name="title_activity_edit">編集</string>
 	<string name="action_about">バージョン情報</string>
 	<string name="aboutdialog_title">%sについて</string>
-	<string name="aboutdialog_text">Version %s\nCopyright (C) 2013\u0020\u0020Hisanobu Tomari.\nThis program comes with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to redistribute it under certain conditions [GPLv3]; see the source for details.\nソース・追加ステージはhttp://davy.nyacom.net/drsoko/をご覧ください。</string>
+	<string name="aboutdialog_text">Version %s\nCopyright (C) 2013\u0020\u0020Hisanobu Tomari.\nThis program comes with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to redistribute it under certain conditions [GPLv3]; see the source for details.\nソース・追加ステージはhttps://www.okqubit.net/drsoko/をご覧ください。</string>
 	<string name="aboutdialog_dismiss">閉じる</string>
 	<string name="aboutdialog_visitsite">ウェブサイトへ</string>
 </resources>
