@@ -5,10 +5,6 @@
     android:versionCode="3"
     android:versionName="3" >
 
-    <uses-sdk
-		android:minSdkVersion="11"
-		android:targetSdkVersion="23" />
-
     <supports-screens
         android:largeScreens="true"
         android:xlargeScreens="true" />
