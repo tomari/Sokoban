@@ -41,8 +41,8 @@
 	<string name="button_clear">Next</string>
 	<string name="toast_last">Showing the last stage</string>
 	<string name="toast_fst">Showing the first stage</string>
-	<string name="newfile_templ">Untitled\nFile description\n</string>
-	<string name="newstage_templ">--\nStage title\n@\n</string>
+	<string name="newfile_templ" translatable="false">Untitled\nFile description\n</string>
+	<string name="newstage_templ" translatable="false">--\nStage title\n@\n</string>
 	<string name="toast_fileslot_full">No space for new file</string>
 	<string name="toast_io_error">I/O Error</string>
 	<string name="title_edit">Edit which?</string>
@@ -54,5 +54,5 @@
 	<string name="aboutdialog_text">Version %s\nCopyright (C) 2013\u0020\u0020Hisanobu Tomari.\nThis program comes with ABSOLUTELY NO WARRANTY. This is free software, and you are welcome to redistribute it under certain conditions [GPLv3]; see the source for details.\nSee https://www.okqubit.net/drsoko/ for sources and add-on stage data.</string>
 	<string name="aboutdialog_dismiss">Dismiss</string>
 	<string name="aboutdialog_visitsite">Visit website</string>
-	<string name="url_website">https://www.okqubit.net/drsoko/</string>
+	<string name="url_website" translatable="false">https://www.okqubit.net/drsoko/</string>
 </resources>

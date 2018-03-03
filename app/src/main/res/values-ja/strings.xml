@@ -41,6 +41,7 @@
 	<string name="toast_last">最終ステージを表示しています</string>
 	<string name="toast_fst">最初のステージを表示しています</string>
 	<string name="toast_fileslot_full">空き容量不足です</string>
+	<string name="toast_io_error">I/Oエラー</string>
 	<string name="title_edit">どれを編集?</string>
 	<string name="title_cantedit">&#8220;%s&#8221;は編集できません</string>
 	<string name="text_cantedit">内蔵ステージは編集不可です。共有・読み込みを使ってコピーしてみてください。</string>

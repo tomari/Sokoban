@@ -8,7 +8,7 @@
 		<item>Left</item>
 		<item>Hide</item>
 	</string-array>
-	<string-array name="pref_control_place_ids">
+	<string-array name="pref_control_place_ids" translatable="false">
 		<item>0</item>
 		<item>1</item>
 		<item>2</item>
