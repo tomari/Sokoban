@@ -312,10 +312,15 @@ public class SokoActivity extends Activity implements SokoView.SokoTouchListener
 						}
 					});
 				} else {
-					boolean isFirst=stage<1;
+					final boolean isFirst=stage<1;
 					if(showToast) {
-						toast = Toast.makeText(SokoActivity.this, isFirst ? R.string.toast_fst : R.string.toast_last, Toast.LENGTH_SHORT);
-						toast.show();
+						handle.post(new Runnable(){
+							@Override
+							public void run(){
+								toast = Toast.makeText(SokoActivity.this, isFirst ? R.string.toast_fst : R.string.toast_last, Toast.LENGTH_SHORT);
+								toast.show();
+							}
+						});
 					}
 				}
 				handle.post(new Runnable() {
